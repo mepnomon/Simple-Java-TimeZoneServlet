@@ -30,6 +30,7 @@ public class PersonalHelloServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String name = request.getParameter("name");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -38,7 +39,14 @@ public class PersonalHelloServlet extends HttpServlet {
             out.println("<title>Servlet PersonalHelloServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PersonalHelloServlet at " + request.getContextPath() + "</h1>");
+            
+            if (!name.equals("")) {
+                out.println("<h1>Hello " + name + "</h1>");
+            } else {
+                out.println("<h1>Hello User</h1>");
+                out.println("<h1>Don't forget to enter your name!</h1>");
+            }
+            
             out.println("</body>");
             out.println("</html>");
         }
