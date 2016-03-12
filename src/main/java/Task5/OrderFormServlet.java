@@ -64,9 +64,6 @@ public class OrderFormServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-          description = request.getParameter("description");
-          code        = request.getParameter("code");
-          quantity    = request.getParameter("quantity");
     }
 
     /**
@@ -80,11 +77,11 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
         
-        
-                
-        
+        description = request.getParameter("description");
+        code        = request.getParameter("code");
+        quantity    = request.getParameter("quantity");
+        processRequest(request, response);       
     }
 
     /**
