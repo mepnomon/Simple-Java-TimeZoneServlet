@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Acer
  */
 public class OrderFormServlet extends HttpServlet {
-
+    private String description;
+    private String code;
+    private String quantity;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,18 +32,22 @@ public class OrderFormServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet OrderFormServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet OrderFormServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+               /* TODO output your page here. You may use following sample code. */
+               out.println("<!DOCTYPE html>");
+               out.println("<html>");
+               out.println("<head>");
+               out.println("<title>Servlet OrderFormServlet</title>");            
+               out.println("</head>");
+               out.println("<body>");
+               //out.println("<h1>Servlet OrderFormServlet at " + request.getContextPath() + "</h1>");
+               out.println("<p>Description: " + description + "</p>");
+               out.println("<p>Code: " + code + "</p>");
+               out.println("<p>Quantity: " + quantity + "</p>");
+               out.println("</body>");
+               out.println("</html>");
+           }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,6 +63,10 @@ public class OrderFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+          description = request.getParameter("description");
+          code        = request.getParameter("code");
+          quantity    = request.getParameter("quantity");
     }
 
     /**
@@ -71,6 +81,10 @@ public class OrderFormServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
+                
+        
     }
 
     /**
