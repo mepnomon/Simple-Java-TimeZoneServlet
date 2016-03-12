@@ -11,8 +11,9 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <p>Click button to get message</p>
-        <form method="GET" action="/TimeZoneServlet/HelloWorldServlet">
+        <p>Enter your name and click the button: </p>
+        <form method="GET" action="/TimeZoneServlet/PersonalHelloServlet">
+            <input type="text" name="name" value="" />
             <input value="Get Message" type="submit" />
         </form>
     </body>
