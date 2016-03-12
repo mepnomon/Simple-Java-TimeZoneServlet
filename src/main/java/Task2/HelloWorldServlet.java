@@ -40,7 +40,8 @@ public class HelloWorldServlet extends HttpServlet {
             out.println("<title>Servlet HelloWorldServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HelloWorldServlet at " + request.getContextPath() + "</h1>");
+            //out.println("<h1>Servlet HelloWorldServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h2>Hello World!</h2>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -84,5 +85,4 @@ public class HelloWorldServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
