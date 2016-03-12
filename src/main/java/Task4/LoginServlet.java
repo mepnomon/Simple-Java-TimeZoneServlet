@@ -44,7 +44,6 @@ public class LoginServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<p>Hi user " + username + ". You are now logged into the system</p>");
-            out.println("<h1>PASSWWORD: " + password + "</h1>);
             out.println("</body>");
             out.println("</html>");
         }
