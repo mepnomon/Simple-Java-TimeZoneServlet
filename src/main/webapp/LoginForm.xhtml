@@ -7,10 +7,18 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
+        <title>Task 4: Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <form action="/TimeZoneServlet/LoginServlet" method="post">
+            <label>Username: </label>
+            <input name="username" type="text"/>
+            <br/>
+            <label>Password: </label>
+            <input name="password" type="password"/>
+            <br/>
+            <input type="submit" value="SUBMIT"/>
+        </form>
     </body>
 </html>
