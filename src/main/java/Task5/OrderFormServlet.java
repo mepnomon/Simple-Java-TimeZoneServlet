@@ -11,15 +11,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 /**
  *
- * @author Acer
+ * @author Dorian Dressler
  */
 public class OrderFormServlet extends HttpServlet {
+    
+    private Enumeration orderEnumerator;
     private String description;
     private String code;
     private String quantity;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,6 +35,7 @@ public class OrderFormServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
@@ -62,7 +67,9 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
+        
         
     }
 
@@ -81,7 +88,9 @@ public class OrderFormServlet extends HttpServlet {
         description = request.getParameter("description");
         code        = request.getParameter("code");
         quantity    = request.getParameter("quantity");
-        processRequest(request, response);       
+        
+        processRequest(request, response);
+            
     }
 
     /**
