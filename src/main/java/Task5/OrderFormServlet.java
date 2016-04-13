@@ -18,10 +18,9 @@ import java.util.Enumeration;
  * @author Acer
  */
 public class OrderFormServlet extends HttpServlet {
-    private String description;
-    private String code;
-    private String quantity;
-    private Enumeration deliveryOptions;
+   
+    private static Enumeration orderDetails;
+    private String customerID;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,20 +36,23 @@ public class OrderFormServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
-               /* TODO output your page here. You may use following sample code. */
-               out.println("<!DOCTYPE html>");
-               out.println("<html>");
-               out.println("<head>");
-               out.println("<title>Servlet OrderFormServlet</title>");            
-               out.println("</head>");
-               out.println("<body>");
-               //out.println("<h1>Servlet OrderFormServlet at " + request.getContextPath() + "</h1>");
-               out.println("<p>Description: " + description + "</p>");
-               out.println("<p>Code: " + code + "</p>");
-               out.println("<p>Quantity: " + quantity + "</p>");
-               out.println("</body>");
-               out.println("</html>");
-           }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet OrderFormServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+               
+            while(orderDetails.hasMoreElements()){
+            
+                String field = (String) orderDetails.nextElement();
+                out.println("<p>"  + field + ": " + request.getParameter(field) + "</p>");
+            }
+            //out.println("<p>CustomerID: " + request.getParameter(customerID) + "</p>");
+            out.println("</body>");
+            out.println("</html>");     
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,11 +82,8 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        description = request.getParameter("description");
-        code        = request.getParameter("code");
-        quantity    = request.getParameter("quantity");
-        deliveryOptions    = request.getParameterNames("delivery-options");
+
+        orderDetails = request.getParameterNames();
         processRequest(request, response);       
     }
 
