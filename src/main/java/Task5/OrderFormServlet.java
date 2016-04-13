@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 /**
  *
@@ -20,6 +21,8 @@ public class OrderFormServlet extends HttpServlet {
     private String description;
     private String code;
     private String quantity;
+    private Enumeration deliveryOptions;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -81,6 +84,7 @@ public class OrderFormServlet extends HttpServlet {
         description = request.getParameter("description");
         code        = request.getParameter("code");
         quantity    = request.getParameter("quantity");
+        deliveryOptions    = request.getParameterNames("delivery-options");
         processRequest(request, response);       
     }
 
