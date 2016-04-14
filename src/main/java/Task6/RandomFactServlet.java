@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Acer
  */
 public class RandomFactServlet extends HttpServlet {
-   
+
     private static int hitCounter = 0;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,25 +34,37 @@ public class RandomFactServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             final String FILE_NAME = "randomFacts.txt";
             final URI FILE_LOCATION;
             try {
                 FILE_LOCATION = this.getClass().getResource("/" + FILE_NAME).toURI();
                 File file = new File(FILE_LOCATION);
+                Scanner in = new Scanner(file);
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet RandomFactServlet</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet RandomFactServlet at " + request.getContextPath() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
+
             } catch (URISyntaxException ex) {
                 Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet RandomFactServlet ERROR</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet RandomFactServlet ERROR at " + ex.getMessage() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
             }
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RandomFactServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RandomFactServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
     }
 
@@ -67,7 +80,7 @@ public class RandomFactServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         ++hitCounter;
         processRequest(request, response);
     }
