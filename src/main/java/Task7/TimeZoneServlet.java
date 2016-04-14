@@ -49,7 +49,8 @@ public class TimeZoneServlet extends HttpServlet {
                 out.println("Sorry, no information is availble for " + city);
             }
                     
-            out.println();
+            out.println("<form action=\"/TimeZoneServlet/SetTimeZone.xhtml\">"
+                    + "<input type=\"submit\" value=\"Back\"/></form>");
             out.println("</body>");
             out.println("</html>");
         }
