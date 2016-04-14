@@ -5,6 +5,7 @@
  */
 package Task6;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RandomFactServlet extends HttpServlet {
 
+    final String FILELOCATION = "/src/main/resources/randomFacts.txt";
+    File file = new File(FILELOCATION);
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
