@@ -68,6 +68,7 @@ public class RandomFactServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //increments hit counter
         ++hitCounter;
         processRequest(request, response);
     }
