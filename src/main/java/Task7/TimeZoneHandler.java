@@ -16,7 +16,6 @@ public class TimeZoneHandler {
     private DateFormat timeFormatter;
     private  String city;
     private TimeZone zone;
-    //private String ids[];
     
     
     /**
@@ -25,7 +24,6 @@ public class TimeZoneHandler {
     public TimeZoneHandler(){
         
         timeFormatter = DateFormat.getTimeInstance();
-        //ids = TimeZone.getAvailableIDs();
     }
     
     /**
@@ -53,7 +51,7 @@ public class TimeZoneHandler {
         if(zone == null) return "not available";
         timeFormatter.setTimeZone(zone);
         Date time = new Date();
-        String timeString = timeFormatter.format(time);
+        String timeString = timeFormatter.format(time); //formats time to local output
         return timeString;
     }
     
