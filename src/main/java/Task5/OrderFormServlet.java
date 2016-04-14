@@ -46,12 +46,11 @@ public class OrderFormServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
                
-            while(orderDetails.hasMoreElements()){
-            
-                String field = (String) orderDetails.nextElement();
+            while(orderEnumerator.hasMoreElements()){
+                String field = (String) orderEnumerator.nextElement();
                 out.println("<p>"  + field + ": " + request.getParameter(field) + "</p>");
             }
-            //out.println("<p>CustomerID: " + request.getParameter(customerID) + "</p>");
+            
             out.println("</body>");
             out.println("</html>");     
         }
