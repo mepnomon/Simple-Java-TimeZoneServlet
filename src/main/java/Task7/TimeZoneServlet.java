@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Dorian Dressler
  */
 public class TimeZoneServlet extends HttpServlet {
-
+    private String city;
+    private TimeZoneHandler timeZoneHandler;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,6 +32,7 @@ public class TimeZoneServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -38,7 +41,15 @@ public class TimeZoneServlet extends HttpServlet {
             out.println("<title>Servlet TimeZoneServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TimeZoneServlet at " + request.getContextPath() + "</h1>");
+            
+            String time = timeZoneHandler.getTime();
+            if (!time.equals("not available")) {
+                out.println("The current time in " + city + " is " + time);
+            } else {
+                out.println("Sorry, no information is availble for " + city);
+            }
+                    
+            out.println();
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,6 +67,8 @@ public class TimeZoneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        city = request.getParameter("city");
+        timeZoneHandler = new TimeZoneHandler(city);
         processRequest(request, response);
     }
 
