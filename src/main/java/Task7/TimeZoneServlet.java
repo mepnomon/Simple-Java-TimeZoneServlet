@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Acer
+ * @author Dorian Dressler
  */
 public class TimeZoneServlet extends HttpServlet {
 
