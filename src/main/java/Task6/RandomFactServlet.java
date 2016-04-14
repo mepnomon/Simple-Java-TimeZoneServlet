@@ -1,10 +1,12 @@
 package Task6;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,38 +36,53 @@ public class RandomFactServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            final String FILE_NAME = "randomFacts.txt";
-            final URI FILE_LOCATION;
-            try {
-                FILE_LOCATION = this.getClass().getResource("/" + FILE_NAME).toURI();
-                File file = new File(FILE_LOCATION);
-                Scanner in = new Scanner(file);
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet RandomFactServlet</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet RandomFactServlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet RandomFactServlet ERROR</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet RandomFactServlet ERROR at " + ex.getMessage() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            }
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Fact of the Day!</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Fact of the Day!</h1>");
+            out.println("<p>" + getRandomFact() + "</p>");
+            out.println("<p> Site hits " + hitCounter + "</p>");
+            out.println("</body>");
+            out.println("</html>");
             /* TODO output your page here. You may use following sample code. */
 
         }
+    }
+
+    private String getRandomFact() {
+        // Get a random number
+        Random rand = new Random();
+        int randomFactNo = rand.nextInt(30) + 1;
+        String fact = "";
+        try {
+            final String FILE_NAME = "randomFacts.txt";
+            final URI FILE_LOCATION = this.getClass().getResource("/" + FILE_NAME).toURI();
+            File file = new File(FILE_LOCATION);
+            Scanner in = new Scanner(file);
+
+            while (in.hasNext()) {
+                String line = in.nextLine();
+                String parts[] = line.split(":");
+                int num = Integer.parseInt(parts[0]);
+
+                if (num == randomFactNo) {
+                    fact = parts[1];
+                    break;
+                }
+            }
+
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
+            fact = "Error loading fact";
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
+            fact = "Error loading fact";
+        }
+
+        return fact;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
