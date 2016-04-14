@@ -55,11 +55,12 @@ public class RandomFactServlet extends HttpServlet {
     private String getRandomFact() {
         // Get a random number
         Random rand = new Random();
+        
         int randomFactNo = rand.nextInt(30) + 1;
         String fact = "";
         try {
             final String FILE_NAME = "randomFacts.txt";
-            final URI FILE_LOCATION = this.getClass().getResource("/" + FILE_NAME).toURI();
+            final URI FILE_LOCATION = RandomFactServlet.class.getResource("/" + FILE_NAME).toURI();
             File file = new File(FILE_LOCATION);
             Scanner in = new Scanner(file);
 
