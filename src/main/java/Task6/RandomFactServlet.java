@@ -82,7 +82,6 @@ public class RandomFactServlet extends HttpServlet {
             Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
             fact = "Error loading fact";
         }
-
         return fact;
     }
 
