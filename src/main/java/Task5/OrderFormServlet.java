@@ -85,19 +85,8 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-
-        orderDetails = request.getParameterNames();
-        processRequest(request, response);       
-=======
-        
-        description = request.getParameter("description");
-        code        = request.getParameter("code");
-        quantity    = request.getParameter("quantity");
-        
+        orderEnumerator = request.getParameterNames();
         processRequest(request, response);
-            
->>>>>>> d6a07570d4689a3c168f5160b18b93e0d915e6aa
     }
 
     /**
