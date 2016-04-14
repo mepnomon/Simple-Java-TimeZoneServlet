@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Task5;
+package Task7;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,15 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 
 /**
  *
  * @author Dorian Dressler
  */
-public class OrderFormServlet extends HttpServlet {   
-    private static Enumeration orderEnumerator;
-    private String customerID;
+public class TimeZoneServlet extends HttpServlet {
+    private String city;
+    private TimeZoneHandler timeZoneHandler;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +31,6 @@ public class OrderFormServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
@@ -40,18 +38,21 @@ public class OrderFormServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderFormServlet</title>");            
+            out.println("<title>Servlet TimeZoneServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Testing doPost...</h1>");
-               
-            while(orderEnumerator.hasMoreElements()){
-                String field = (String) orderEnumerator.nextElement();
-                out.println("<p>"  + field + " = " + request.getParameter(field) + "</p>");
-            }
             
+            String time = timeZoneHandler.getTime();
+            if (!time.equals("not available")) {
+                out.println("The current time in " + city + " is " + time);
+            } else {
+                out.println("Sorry, no information is availble for " + city);
+            }
+                    
+            out.println("<form action=\"/TimeZoneServlet/SetTimeZone.xhtml\">"
+                    + "<input type=\"submit\" value=\"Back\"/></form>");
             out.println("</body>");
-            out.println("</html>");     
+            out.println("</html>");
         }
     }
 
@@ -67,10 +68,10 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        city = request.getParameter("city");
+        timeZoneHandler = new TimeZoneHandler();
+        timeZoneHandler.setCity(city);
         processRequest(request, response);
-        
-        
     }
 
     /**
@@ -84,8 +85,6 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        orderEnumerator = request.getParameterNames();
         processRequest(request, response);
     }
 

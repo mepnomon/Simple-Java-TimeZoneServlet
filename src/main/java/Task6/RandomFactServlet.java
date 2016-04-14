@@ -1,26 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Task5;
+package Task6;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 
 /**
  *
  * @author Dorian Dressler
  */
-public class OrderFormServlet extends HttpServlet {   
-    private static Enumeration orderEnumerator;
-    private String customerID;
-    
+public class RandomFactServlet extends HttpServlet {
+
+    private static int hitCounter = 0;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,27 +34,56 @@ public class OrderFormServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
-        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderFormServlet</title>");            
+            out.println("<title>Fact of the Day!</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Testing doPost...</h1>");
-               
-            while(orderEnumerator.hasMoreElements()){
-                String field = (String) orderEnumerator.nextElement();
-                out.println("<p>"  + field + " = " + request.getParameter(field) + "</p>");
-            }
-            
+            out.println("<h1>Fact of the Day!</h1>");
+            out.println("<p>" + getRandomFact() + "</p>");
+            out.println("<p> Site hits " + hitCounter + "</p>");
             out.println("</body>");
-            out.println("</html>");     
+            out.println("</html>");
+            /* TODO output your page here. You may use following sample code. */
+
         }
+    }
+
+    private String getRandomFact() {
+        // Get a random number
+        Random rand = new Random();
+        
+        int randomFactNo = rand.nextInt(30) + 1;
+        String fact = "";
+        try {
+            final String FILE_NAME = "randomFacts.txt";
+            final URI FILE_LOCATION = RandomFactServlet.class.getResource("/" + FILE_NAME).toURI();
+            File file = new File(FILE_LOCATION);
+            Scanner in = new Scanner(file);
+
+            while (in.hasNext()) {
+                String line = in.nextLine();
+                String parts[] = line.split(":");
+                int num = Integer.parseInt(parts[0]);
+
+                if (num == randomFactNo) {
+                    fact = parts[1];
+                    break;
+                }
+            }
+
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
+            fact = "Error loading fact";
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
+            fact = "Error loading fact";
+        }
+
+        return fact;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,10 +98,8 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        ++hitCounter;
         processRequest(request, response);
-        
-        
     }
 
     /**
@@ -84,8 +113,6 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        orderEnumerator = request.getParameterNames();
         processRequest(request, response);
     }
 
