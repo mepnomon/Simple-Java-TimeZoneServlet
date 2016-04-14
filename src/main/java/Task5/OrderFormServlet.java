@@ -45,10 +45,11 @@ public class OrderFormServlet extends HttpServlet {
             out.println("<title>Servlet OrderFormServlet</title>");            
             out.println("</head>");
             out.println("<body>");
+            out.println("<h1>Testing doPost...</h1>");
                
             while(orderEnumerator.hasMoreElements()){
                 String field = (String) orderEnumerator.nextElement();
-                out.println("<p>"  + field + ": " + request.getParameter(field) + "</p>");
+                out.println("<p>"  + field + " = " + request.getParameter(field) + "</p>");
             }
             
             out.println("</body>");

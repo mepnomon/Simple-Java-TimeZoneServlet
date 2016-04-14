@@ -8,6 +8,8 @@ package Task6;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,12 +33,13 @@ public class RandomFactServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, URISyntaxException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            final String FILELOCATION = "/src/main/resources/randomFacts.txt";
-            File file = new File(FILELOCATION);
+            final String FILE_NAME = "randomFacts.txt";
+            final URI FILE_LOCATION = this.getClass().getResource("/" + FILE_NAME).toURI();
+            File file = new File(FILE_LOCATION);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
