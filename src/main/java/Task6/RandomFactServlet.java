@@ -18,9 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author Acer
  */
 public class RandomFactServlet extends HttpServlet {
-
-    final String FILELOCATION = "/src/main/resources/randomFacts.txt";
-    File file = new File(FILELOCATION);
+   
+    private static int hitCounter = 0;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,6 +34,9 @@ public class RandomFactServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
+            final String FILELOCATION = "/src/main/resources/randomFacts.txt";
+            File file = new File(FILELOCATION);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
