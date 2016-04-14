@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,13 +30,18 @@ public class RandomFactServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, URISyntaxException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             final String FILE_NAME = "randomFacts.txt";
-            final URI FILE_LOCATION = this.getClass().getResource("/" + FILE_NAME).toURI();
-            File file = new File(FILE_LOCATION);
+            final URI FILE_LOCATION;
+            try {
+                FILE_LOCATION = this.getClass().getResource("/" + FILE_NAME).toURI();
+                File file = new File(FILE_LOCATION);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
