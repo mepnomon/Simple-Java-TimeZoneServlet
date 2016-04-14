@@ -16,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Dorian Dressler
+ * ICP-2052 - Mini Project 4: Java Servlets
+ * Class: RandomFactServlet
+ * Created: 2016-04-14
+ * 
+ * @author Dorian Dressler (eeu436), James Ashford (eeu48c)
  */
 public class RandomFactServlet extends HttpServlet {
 
@@ -51,7 +54,13 @@ public class RandomFactServlet extends HttpServlet {
 
         }
     }
-
+    
+    /**
+     * Retrieves a fact from a text file.
+     * Does so by generating a pseudorandom number, which is used
+     * to select a fact.
+     * @return a String passage retrieved from a text file.
+     */
     private String getRandomFact() {
         // Get a random number
         Random rand = new Random();
@@ -122,7 +131,7 @@ public class RandomFactServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Returns a random fact and counts hits";
     }// </editor-fold>
 
 }

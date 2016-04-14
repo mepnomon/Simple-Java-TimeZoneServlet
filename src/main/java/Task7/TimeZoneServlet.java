@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Dorian Dressler
+ * ICP-2052 - Mini Project 4: Java Servlets
+ * Class: TimeZoneServlet
+ * Created: 2016-03-12
+ * 
+ * @author Dorian Dressler (eeu436), James Ashford (eeu48c)
  */
 public class TimeZoneServlet extends HttpServlet {
     private String city;
@@ -56,7 +59,6 @@ public class TimeZoneServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,6 +70,7 @@ public class TimeZoneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         city = request.getParameter("city");
         timeZoneHandler = new TimeZoneHandler();
         timeZoneHandler.setCity(city);
@@ -95,7 +98,7 @@ public class TimeZoneServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet retrieves the time at the chosen city";
     }// </editor-fold>
 
 }

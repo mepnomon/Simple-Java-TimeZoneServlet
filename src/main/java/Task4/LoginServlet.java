@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Task4;
 
 import java.io.IOException;
@@ -13,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Acer
+ * ICP-2052 - Mini Project 4: Java Servlets
+ * Class: LoginServlet
+ * Created: 2016-03-12
+ * 
+ * @author Dorian Dressler (eeu436), James Ashford (eeu48c)
  */
 public class LoginServlet extends HttpServlet {
 
@@ -85,7 +83,7 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Read back of login details.";
     }// </editor-fold>
 
 }
