@@ -13,17 +13,24 @@ public class TimeZoneHandler {
     private DateFormat timeFormatter;
     private  String city;
     private TimeZone zone;
-    private String ids[];
+    //private String ids[];
     
     
     /**
      * Constructor for TimeZone
      */
-    public TimeZoneHandler(String city){
+    public TimeZoneHandler(){
         
-        this.city = city;
         timeFormatter = DateFormat.getTimeInstance();
-        ids = TimeZone.getAvailableIDs();
+        //ids = TimeZone.getAvailableIDs();
+    }
+    
+    public void setCity(String aCity){
+        city = aCity;
+    }
+    
+    public String getCity(){
+        return city;
     }
     
     public String getTime(){
@@ -33,8 +40,27 @@ public class TimeZoneHandler {
         Date time = new Date();
         String timeString = timeFormatter.format(time);
         return timeString;
-        
     }
     
+    public String checkCity(){
+        
+        zone = getTimeZone(city);
+        if(zone == null) return "error";
+        return "next";
+    }
     
+    public static TimeZone getTimeZone(String aCity){
+        
+        String[] ids = TimeZone.getAvailableIDs();
+        for(int i = 0; i < ids.length; i++)
+            if(timeZoneIDMatch(ids[i], aCity))
+                return TimeZone.getTimeZone(ids[i]);
+        return null;
+    }
+    
+    private static boolean timeZoneIDMatch(String id, String aCity){
+        
+        String idCity = id.substring(id.indexOf('/') + 1);
+        return idCity.replace('_', ' ').equals(aCity);
+    }
 }
