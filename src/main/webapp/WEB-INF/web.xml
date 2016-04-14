@@ -16,6 +16,10 @@
         <servlet-name>RandomFactServlet</servlet-name>
         <servlet-class>Task6.RandomFactServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TimeZoneServlet</servlet-name>
+        <servlet-class>Task7.TimeZoneServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonalHelloServlet</servlet-name>
         <url-pattern>/PersonalHelloServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>RandomFactServlet</servlet-name>
         <url-pattern>/RandomFactServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimeZoneServlet</servlet-name>
+        <url-pattern>/TimeZoneServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
