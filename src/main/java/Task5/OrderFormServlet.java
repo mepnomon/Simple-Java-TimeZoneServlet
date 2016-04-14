@@ -18,17 +18,14 @@ import java.util.Enumeration;
  * @author Dorian Dressler
  */
 public class OrderFormServlet extends HttpServlet {
-<<<<<<< HEAD
    
     private static Enumeration orderDetails;
     private String customerID;
-=======
-    
     private Enumeration orderEnumerator;
     private String description;
     private String code;
     private String quantity;
->>>>>>> d6a07570d4689a3c168f5160b18b93e0d915e6aa
+
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -93,19 +90,17 @@ public class OrderFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
+
 
         orderDetails = request.getParameterNames();
         processRequest(request, response);       
-=======
-        
+
         description = request.getParameter("description");
         code        = request.getParameter("code");
         quantity    = request.getParameter("quantity");
         
         processRequest(request, response);
             
->>>>>>> d6a07570d4689a3c168f5160b18b93e0d915e6aa
     }
 
     /**
