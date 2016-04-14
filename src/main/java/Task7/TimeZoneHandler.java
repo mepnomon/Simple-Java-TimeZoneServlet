@@ -34,7 +34,7 @@ public class TimeZoneHandler {
     }
     
     public String getTime(){
-        
+        checkCity();
         if(zone == null) return "not available";
         timeFormatter.setTimeZone(zone);
         Date time = new Date();
@@ -42,7 +42,7 @@ public class TimeZoneHandler {
         return timeString;
     }
     
-    public String checkCity(){
+    private String checkCity(){
         
         zone = getTimeZone(city);
         if(zone == null) return "error";
@@ -52,15 +52,34 @@ public class TimeZoneHandler {
     public static TimeZone getTimeZone(String aCity){
         
         String[] ids = TimeZone.getAvailableIDs();
-        for(int i = 0; i < ids.length; i++)
-            if(timeZoneIDMatch(ids[i], aCity))
+        System.out.println("ID's");
+        
+        for(int i = 0; i < ids.length; i++) {
+            if(timeZoneIDMatch(ids[i], aCity)) {
                 return TimeZone.getTimeZone(ids[i]);
+            }
+            
+        }
         return null;
     }
     
     private static boolean timeZoneIDMatch(String id, String aCity){
+        aCity = aCity.replace(" ", "_");
         
+        if (id.contains("/")) {
+            String[] parts = id.split("/");
+            if (parts[1].toUpperCase().equals(aCity.toUpperCase())) {
+                return true;
+            }
+        } else {
+            if (id.toUpperCase().equals(aCity.toUpperCase())) {
+                return true;
+            }
+        }
+        /*
         String idCity = id.substring(id.indexOf('/') + 1);
         return idCity.replace('_', ' ').equals(aCity);
+*/
+        return false;
     }
 }

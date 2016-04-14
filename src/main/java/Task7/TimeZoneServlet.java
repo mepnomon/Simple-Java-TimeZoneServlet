@@ -68,7 +68,8 @@ public class TimeZoneServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         city = request.getParameter("city");
-        timeZoneHandler = new TimeZoneHandler(city);
+        timeZoneHandler = new TimeZoneHandler();
+        timeZoneHandler.setCity(city);
         processRequest(request, response);
     }
 
