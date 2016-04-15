@@ -46,7 +46,7 @@ public class RandomFactServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Fact of the Day!</h1>");
-            out.println("<p>" + getRandomFact() + "</p>");
+            out.println("<p> " + getRandomFact() + "</p>");
             out.println("<p> Site hits " + hitCounter + "</p>");
             out.println("</body>");
             out.println("</html>");
@@ -83,11 +83,7 @@ public class RandomFactServlet extends HttpServlet {
                     break;
                 }
             }
-
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
-            fact = "Error loading fact";
-        } catch (FileNotFoundException ex) {
+        } catch (URISyntaxException | FileNotFoundException ex) {
             Logger.getLogger(RandomFactServlet.class.getName()).log(Level.SEVERE, null, ex);
             fact = "Error loading fact";
         }
